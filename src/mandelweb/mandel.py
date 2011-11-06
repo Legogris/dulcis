@@ -9,7 +9,7 @@ import png
 import palette
 import collections
 
-Almond = collections.namedtuple('Almond', ['re', 'im', 'iterations', 'resultRe', 'resultIm', 'outside'])
+Almond = collections.namedtuple('Almond', ['re', 'im', 'iterations', 'result', 'outside'])
 
 def calculateAlmond(c, maxIterations):
     iterations = 0
@@ -17,9 +17,9 @@ def calculateAlmond(c, maxIterations):
     while(iterations < maxIterations):
         z = z*z + c
         if abs(z) > 2:
-            return Almond(c.real, c.imag, iterations, z.real, z.imag, True)
+            return Almond(c.real, c.imag, iterations, z, True)
         iterations += 1
-    return Almond(c.real, c.imag, iterations, 0, 0, False)
+    return Almond(c.real, c.imag, iterations, complex(0, 0), False)
 
 def generateSet(start, end, resolution, iterations):
     almonds = []

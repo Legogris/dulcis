@@ -1,4 +1,6 @@
 django-celery
 numpy
 redis
-mysql-python
+numexpr
+cython
+tables
