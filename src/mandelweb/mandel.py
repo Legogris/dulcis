@@ -17,9 +17,9 @@ def calculateAlmond(c, maxIterations):
     while(iterations < maxIterations):
         z = z*z + c
         if abs(z) > 2:
-            return iterations
+            return Almond(c.real, c.imag, iterations, z.real, z.imag, True)
         iterations += 1
-    return False
+    return Almond(c.real, c.imag, iterations, 0, 0, False)
 
 def generateSet(start, end, resolution, iterations):
     almonds = []
