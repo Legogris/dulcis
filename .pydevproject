@@ -11,6 +11,6 @@
 <value>mandelweb.settings</value>
 </pydev_variables_property>
 <pydev_pathproperty name="org.python.pydev.PROJECT_SOURCE_PATH">
-<path>/mandelweb/src</path>
+<path>/dulcis/src</path>
 </pydev_pathproperty>
 </pydev_project>

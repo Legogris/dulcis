@@ -9,9 +9,9 @@ import png
 import palette
 import collections
 
-Point = collections.namedtuple('Point', ['x', 'y'])
+Almond = collections.namedtuple('Almond', ['re', 'im', 'iterations', 'resultRe', 'resultIm', 'outside'])
 
-def isInSet(c, maxIterations):
+def calculateAlmond(c, maxIterations):
     iterations = 0
     z = 0
     while(iterations < maxIterations):
@@ -21,21 +21,20 @@ def isInSet(c, maxIterations):
         iterations += 1
     return False
 
-def generateSet(startPoint, endPoint, resolution):
-    rows = []
-    for x in np.linspace(startPoint.x, endPoint.x, resolution):
-        row = []
-        rows.append(row)
-        for y in np.linspace(startPoint.y, endPoint.y, resolution):
-            c = complex(x, y)
-            n = isInSet(c, 100) % len(palette.palette)
-            row.append(n)
-    return rows
+def generateSet(start, end, resolution, iterations):
+    almonds = []
+    for re in np.linspace(start.real, end.real, resolution):
+        for im in np.linspace(start.imag, end.imag, resolution):
+            c = complex(re, im)
+            a = calculateAlmond(c, iterations)
+            almonds.append(a)
+    return almonds
 
-f = open('mandel.png', 'wb')
-res = 8000
-w = png.Writer(res, res, palette=palette.palette)
-rows = generateSet(Point(-2, -2), Point(2, 2), res)
-w.write(f, rows)
-f.close()
-print "finished!"
+def test():
+    f = open('mandel.png', 'wb')
+    res = 8000
+    w = png.Writer(res, res, palette=palette.palette)
+    rows = generateSet(complex(-2, -2), complex(2, 2), res)
+    w.write(f, rows)
+    f.close()
+    print "finished!"
